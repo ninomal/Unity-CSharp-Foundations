@@ -1,8 +1,11 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using TMPro;
+
 
 public class SensorAlvo : MonoBehaviour {
     private bool colider;
+    public TextMeshProUGUI meuTexto;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,12 +19,14 @@ public class SensorAlvo : MonoBehaviour {
             if (renderer != null)
             {
                 renderer.material.color = Color.blue;
-                Debug.Log("Sucesso! O " + other.name + " agora é azul.");
+                meuTexto.text = "ALVO ATINGIDO!";
+                meuTexto.color = Color.green; // Bônus: mude a cor do texto também!
             }
         }
         else
         {
-            Debug.Log("Algo entrou no sensor, mas não era o Player.");
+            meuTexto.text = "ALVO NAO E UM PLAYER!";
+            meuTexto.color = Color.blue; // Bônus: mude a cor do texto também!
         }
     }
 
