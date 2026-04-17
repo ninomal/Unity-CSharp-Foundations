@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     void Start() {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -0.5f, 0);
         _input = GetComponent<IDriveInput>();
     }
 
