@@ -5,6 +5,7 @@ public  class PlayerTelemetria : MonoBehaviour
 {
     public TextMeshProUGUI textoVelocidade;
     private Rigidbody rb;
+    public SerialTelemetryManager telemetry;
 
     void Start()
     {
@@ -28,8 +29,19 @@ public  class PlayerTelemetria : MonoBehaviour
         {
             float velMS = rb.linearVelocity.magnitude;
 
+            string velKmh = FormatarVelocidadeKmH(velMS);
+
             //usamos nosso metodo utilitario para formatar o texto
-            textoVelocidade.text = "Velocidade: " + FormatarVelocidadeKmH(velMS);
+            textoVelocidade.text = "Velocidade: " + velKmh;
+
+            if (telemetry != null)
+            {
+                // Note: telemetry.SendSpeed já converte internamente se necessário
+                // ou enviamos o float puro para ele tratar
+                telemetry.SendSpeed(velKmh);
+            }
+
+
         }
     }
 }
